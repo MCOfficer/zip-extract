@@ -9,8 +9,7 @@ edition = "2018"
 "deflate-miniz" = ["zip/deflate-miniz"]
 "default-zlib" = ["zip/deflate-zlib"]
 "bzip2" = ["zip/bzip2"]
-"time" = ["zip/time"]
-"default" = ["zip/default"]
+"default" = ["bzip2", "deflate"]
 
 [dependencies]
 log = "0.4.8"

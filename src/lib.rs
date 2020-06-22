@@ -1,3 +1,20 @@
+//! # zip-extract
+//! zip-extract's primary goal is simple: Automate tedious zip extraction. Ever wanted to just unpack
+//! an archive somewhere? Well, here you go.
+//!
+//! ## Usage
+//! See `extract` for details.
+//!
+//! ## Features
+//! All features are passed through to `zip` and `flate2`. They are:
+//!
+//! - `deflate`: Support for the Deflate algorithm (`miniz_oxide` rust-backend)
+//! - `deflate-miniz`: ^ dito (`miniz` C-backend)
+//! - `deflate-zlib`: ^ dito (`zlib` C-backend)
+//! - `bzip2`: Support for .bzip2 archives via the `bzip2` crate
+//!
+//! The default is `bzip2` and `deflate`.
+
 #![forbid(unsafe_code)]
 
 #[macro_use]
@@ -11,8 +28,11 @@ use std::path::{PathBuf, StripPrefixError};
 use std::{fs, io};
 use thiserror::Error;
 
+/// Re-export of zip's error type, for convenience.
+///
 pub use zip::result::ZipError;
 
+/// zip-extract's error type
 #[derive(Error, Debug)]
 pub enum ZipExtractError {
     #[error(transparent)]
