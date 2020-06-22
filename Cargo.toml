@@ -1,0 +1,23 @@
+[package]
+name = "zip-extract"
+version = "0.1.0"
+authors = ["M*C*O <mcofficer@gmx.de>"]
+edition = "2018"
+
+[features]
+"deflate" = ["zip/deflate"]
+"deflate-miniz" = ["zip/deflate-miniz"]
+"default-zlib" = ["zip/deflate-zlib"]
+"bzip2" = ["zip/bzip2"]
+"time" = ["zip/time"]
+"default" = ["zip/default"]
+
+[dependencies]
+log = "0.4.8"
+zip = "0.5.6"
+thiserror = "1.0"
+
+[dev-dependencies]
+cute-log = { version = "1.4.1", default_features = false }
+dir-diff = "0.3.2"
+tempdir = "0.3.7"
