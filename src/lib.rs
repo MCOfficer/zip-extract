@@ -1,9 +1,18 @@
 //! # zip-extract
 //! zip-extract's primary goal is simple: Automate tedious zip extraction. Ever wanted to just unpack
-//! an archive somewhere? Well, here you go.
+//! an archive somewhere? Well, here you go:
 //!
 //! ## Usage
 //! See `extract` for details.
+//!
+//! ```ignore
+//! let archive: Vec<u8> = download_my_archive()?;
+//! let target_dir = PathBuf::from("my_target_dir"); // Doesn't need to exist
+//!
+//! // The third parameter allows you to strip away toplevel directories.
+//! // If `archive` contained a single folder, that folder's contents would be extracted instead.
+//! zip_extract::extract(Cursor::new(archive), &target_dir, true)?;
+//! ```
 //!
 //! ## Features
 //! All features are passed through to `zip` and `flate2`. They are:
@@ -55,13 +64,16 @@ pub enum ZipExtractError {
 /// if all files and directories within the archive are descendants of the toplevel directory.
 ///
 /// If you want to read from a source that doesn't implement Seek, you can wrap it into a Cursor:
-/// ```rust
+/// ```
 /// use std::io::Cursor;
 /// use std::path::PathBuf;
 ///
 /// let bytes: Vec<u8> = vec![];
-/// zip_extract::extract(Cursor::new(bytes), &PathBuf::from("/tmp/target-directory"), false);
+/// let target = PathBuf::from("/tmp/target-directory");
+/// zip_extract::extract(Cursor::new(bytes), &target, false);
 /// ```
+///
+/// If on unix, `extract` will preserve permissions while extracting.
 pub fn extract<S: Read + Seek>(
     source: S,
     target_dir: &PathBuf,
