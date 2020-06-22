@@ -2,6 +2,7 @@
 zip-extract's primary goal is simple: Automate tedious zip extraction. Ever wanted to just unpack
 an archive somewhere? Well, here you go.
 
+## Usage
 ```rust
 let archive: Vec<u8> = download_my_archive()?;
 let target_dir = PathBuf::from("my_target_dir"); // Doesn't need to exist
@@ -11,8 +12,6 @@ let target_dir = PathBuf::from("my_target_dir"); // Doesn't need to exist
 zip_extract::extract(Cursor::new(archive), &target_dir, true)?;
 ```
 
-## Usage
-See `extract` for details.
 
 ## Features
 All features are passed through to `zip` and `flate2`. They are:
