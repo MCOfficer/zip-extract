@@ -3,6 +3,11 @@ name = "zip-extract"
 version = "0.1.0"
 authors = ["M*C*O <mcofficer@gmx.de>"]
 edition = "2018"
+license = "MIT"
+description = "Archive extraction via zip-rs, automated."
+repository = "https://github.com/MCOfficer/zip-extract"
+keywords = ["zip", "archive", "extract"]
+categories = ["compression"]
 
 [features]
 "deflate" = ["zip/deflate"]
