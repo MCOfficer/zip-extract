@@ -11,12 +11,14 @@ use std::path::{PathBuf, StripPrefixError};
 use std::{fs, io};
 use thiserror::Error;
 
+pub use zip::result::ZipError;
+
 #[derive(Error, Debug)]
 pub enum ZipExtractError {
     #[error(transparent)]
     Io(#[from] io::Error),
     #[error(transparent)]
-    Zip(#[from] zip::result::ZipError),
+    Zip(#[from] ZipError),
     #[error("Failed to strip toplevel directory {} from {}: {error}", .toplevel.to_string_lossy(), .path.to_string_lossy())]
     StripToplevel {
         toplevel: PathBuf,
