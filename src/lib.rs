@@ -33,7 +33,7 @@ extern crate log;
 use std::os::unix::fs::PermissionsExt;
 
 use std::io::{Read, Seek};
-use std::path::{PathBuf, StripPrefixError};
+use std::path::{Path, PathBuf, StripPrefixError};
 use std::{fs, io};
 use thiserror::Error;
 
@@ -76,7 +76,7 @@ pub enum ZipExtractError {
 /// If on unix, `extract` will preserve permissions while extracting.
 pub fn extract<S: Read + Seek>(
     source: S,
-    target_dir: &PathBuf,
+    target_dir: &Path,
     strip_toplevel: bool,
 ) -> Result<(), ZipExtractError> {
     if !target_dir.exists() {
@@ -115,7 +115,7 @@ pub fn extract<S: Read + Seek>(
             continue;
         }
 
-        let mut outpath = target_dir.clone();
+        let mut outpath = target_dir.to_path_buf();
         outpath.push(relative_path);
 
         trace!(
@@ -173,7 +173,7 @@ fn has_toplevel<S: Read + Seek>(
 }
 
 #[cfg(unix)]
-fn set_unix_mode(file: &zip::read::ZipFile, outpath: &PathBuf) -> io::Result<()> {
+fn set_unix_mode(file: &zip::read::ZipFile, outpath: &Path) -> io::Result<()> {
     if let Some(m) = file.unix_mode() {
         fs::set_permissions(&outpath, PermissionsExt::from_mode(m))?
     }
