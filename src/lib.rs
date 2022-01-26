@@ -90,7 +90,7 @@ pub fn extract<S: Read + Seek>(
     debug!("Extracting to {}", target_dir.to_string_lossy());
     for i in 0..archive.len() {
         let mut file = archive.by_index(i)?;
-        let mut relative_path = file.sanitized_name();
+        let mut relative_path = file.mangled_name();
 
         if do_strip_toplevel {
             let base = relative_path
@@ -152,7 +152,7 @@ fn has_toplevel<S: Read + Seek>(
     }
 
     for i in 0..archive.len() {
-        let file = archive.by_index(i)?.sanitized_name();
+        let file = archive.by_index(i)?.mangled_name();
         if let Some(toplevel_dir) = &toplevel_dir {
             if !file.starts_with(toplevel_dir) {
                 trace!("Found different toplevel directory");
