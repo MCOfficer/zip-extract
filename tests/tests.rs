@@ -1,3 +1,5 @@
+use cute_log::log::LevelFilter;
+use cute_log::Logger;
 use dir_diff;
 use std::io::Cursor;
 use std::path::PathBuf;
@@ -10,7 +12,11 @@ use zip_extract::{extract, ZipExtractError};
 static INIT: Once = Once::new();
 
 fn initialize() {
-    INIT.call_once(|| cute_log::debug_init().unwrap());
+    INIT.call_once(|| {
+        const LOGGER: Logger = Logger::new();
+        LOGGER.set_max_level(LevelFilter::Debug);
+        LOGGER.set_logger().unwrap();
+    });
 }
 
 #[test]
