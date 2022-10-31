@@ -32,8 +32,9 @@ extern crate log;
 #[cfg(unix)]
 use std::os::unix::fs::PermissionsExt;
 
+use encoding_rs::{CoderResult, SHIFT_JIS};
 use std::io::{Read, Seek};
-use std::path::{Path, PathBuf, StripPrefixError};
+use std::path::{Component, Path, PathBuf, StripPrefixError};
 use std::{fs, io};
 use thiserror::Error;
 
@@ -87,10 +88,44 @@ pub fn extract<S: Read + Seek>(
 
     let do_strip_toplevel = strip_toplevel && has_toplevel(&mut archive)?;
 
+    fn enclosed_name(file_name: &str) -> Option<&Path> {
+        if file_name.contains('\0') {
+            return None;
+        }
+        let path = Path::new(file_name);
+        let mut depth = 0usize;
+        for component in path.components() {
+            match component {
+                Component::Prefix(_) | Component::RootDir => return None,
+                Component::ParentDir => depth = depth.checked_sub(1)?,
+                Component::Normal(_) => depth += 1,
+                Component::CurDir => (),
+            }
+        }
+        Some(path)
+    }
+
     debug!("Extracting to {}", target_dir.to_string_lossy());
     for i in 0..archive.len() {
         let mut file = archive.by_index(i)?;
-        let mut relative_path = file.mangled_name();
+        let relative_path = {
+            let mut str = String::with_capacity(64);
+            let (result, ..) =
+                SHIFT_JIS
+                    .new_decoder()
+                    .decode_to_string(file.name_raw(), &mut str, true);
+
+            if result != CoderResult::InputEmpty {
+                continue;
+            }
+
+            str
+        };
+        let mut relative_path = if let Some(enclosed_name) = enclosed_name(&relative_path) {
+            enclosed_name.to_path_buf()
+        } else {
+            continue;
+        };
 
         if do_strip_toplevel {
             let base = relative_path
