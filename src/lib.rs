@@ -109,7 +109,14 @@ pub fn extract<S: Read + Seek>(
     for i in 0..archive.len() {
         let mut file = archive.by_index(i)?;
         let relative_path = {
-            let mut str = String::with_capacity(64);
+            let decoder = SHIFT_JIS.new_decoder();
+            let mut str = String::with_capacity(
+                if let Some(len) = decoder.max_utf8_buffer_length(file.name_raw().len()) {
+                    len
+                } else {
+                    continue;
+                },
+            );
             let (result, ..) =
                 SHIFT_JIS
                     .new_decoder()
