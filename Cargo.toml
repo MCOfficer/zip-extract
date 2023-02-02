@@ -18,7 +18,7 @@ categories = ["compression"]
 
 [dependencies]
 log = "0.4.14"
-zip = "0.5.13"
+zip = "0.6.4"
 thiserror = "1.0"
 
 [dev-dependencies]
