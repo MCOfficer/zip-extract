@@ -4,7 +4,6 @@ use dir_diff;
 use std::io::Cursor;
 use std::path::PathBuf;
 use std::sync::Once;
-use tempdir::TempDir;
 use zip::result::ZipError::InvalidArchive;
 use zip_extract::ZipExtractError::Zip;
 use zip_extract::{extract, ZipExtractError};
@@ -25,7 +24,7 @@ fn valid_archive() {
 
     let mut source = vec![];
     source.extend_from_slice(include_bytes!("data/valid.zip"));
-    let mut target = TempDir::new("zip-extract").unwrap().into_path();
+    let mut target = get_tempdir();
     target.push("test"); // let zip-extract create it
 
     extract(Cursor::new(source), &target, true).unwrap();
@@ -38,7 +37,7 @@ fn valid_archive_with_toplevel() {
 
     let mut source = vec![];
     source.extend_from_slice(include_bytes!("data/valid_toplevel.zip"));
-    let mut target = TempDir::new("zip-extract").unwrap().into_path();
+    let mut target = get_tempdir();
     target.push("test"); // let zip-extract create it
 
     extract(Cursor::new(source), &target, true).unwrap();
@@ -52,7 +51,7 @@ fn valid_archive_forbid_toplevel() {
 
     let mut source = vec![];
     source.extend_from_slice(include_bytes!("data/valid_toplevel.zip"));
-    let mut target = TempDir::new("zip-extract").unwrap().into_path();
+    let mut target = get_tempdir();
     target.push("test"); // let zip-extract create it
 
     extract(Cursor::new(source), &target, false).unwrap();
@@ -85,4 +84,13 @@ fn invalid_archive() {
     } else {
         false
     });
+}
+
+fn get_tempdir() -> PathBuf {
+    tempfile::Builder::new()
+        .prefix("zip-extract.")
+        .rand_bytes(12)
+        .tempdir()
+        .unwrap()
+        .into_path()
 }
