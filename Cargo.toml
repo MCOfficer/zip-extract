@@ -10,7 +10,7 @@ keywords = ["zip", "archive", "extract"]
 categories = ["compression"]
 
 [features]
-"deflate" = ["zip/deflate"]
+"deflate" = ["zip/deflate", "zip/deflate64"]
 "deflate-miniz" = ["zip/deflate-miniz"]
 "default-zlib" = ["zip/deflate-zlib"]
 "bzip2" = ["zip/bzip2"]
