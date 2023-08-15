@@ -17,8 +17,8 @@ categories = ["compression"]
 "default" = ["bzip2", "deflate"]
 
 [dependencies]
-log = "0.4.14"
-zip = "0.6.4"
+log = "0.4"
+zip = { git = "https://github.com/anatawa12/zip-rs", branch = "deflate64" }
 encoding_rs = "0.8"
 thiserror = "1.0"
 
