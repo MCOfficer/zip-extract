@@ -19,7 +19,7 @@ zip_extract::extract(Cursor::new(archive), &target_dir, true)?;
 
 ## Features
 
-All features are the same as the features of the `zip` crate:
+All features are the same as the features of the [`zip`](https://github.com/zip-rs/zip/tree/v0.6.4#usage) crate:
 
 - `aes-crypto`: Support for AES encryption via the the `zip` crate
 - `deflate`: Support for the Deflate algorithm (`miniz_oxide` rust-backend)
