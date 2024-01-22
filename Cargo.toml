@@ -1,6 +1,6 @@
 [package]
 name = "zip-extract"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["M*C*O <mcofficer@gmx.de>"]
 edition = "2018"
 license = "MIT"
