@@ -20,7 +20,7 @@ unreserved = ["zip/unreserved"]
 bzip2 = ["zip/bzip2"]
 time = ["zip/time"]
 zstd = ["zip/zstd"]
-default = ["aes-crypto", "bzip2", "deflate", "time", "zstd"]
+default = ["aes-crypto", "bzip2", "deflate", "zstd"]
 
 [dependencies]
 log = "0.4.14"

@@ -29,4 +29,4 @@ All features are the same as the features of the [`zip`](https://github.com/zip-
 - `bzip2`: Support for .bzip2 archives via the `bzip2` crate
 - `time`: Support for the `time` crate for the `zip` crate
 - `zstd`: Support for the `zstd` crate for the `zip` crate
-- `default`: enables `"aes-crypto", "bzip2", "deflate", "time", "zstd"`
+- `default`: enables `"aes-crypto", "bzip2", "deflate", "zstd"`
