@@ -9,16 +9,22 @@ repository = "https://github.com/MCOfficer/zip-extract"
 keywords = ["zip", "archive", "extract"]
 categories = ["compression"]
 
+# Mirrors the features of zip package
+# https://github.com/zip-rs/zip/blob/master/Cargo.toml#L36
 [features]
-"deflate" = ["zip/deflate"]
-"deflate-miniz" = ["zip/deflate-miniz"]
-"default-zlib" = ["zip/deflate-zlib"]
-"bzip2" = ["zip/bzip2"]
-"default" = ["bzip2", "deflate"]
+aes-crypto = ["zip/aes-crypto"]
+deflate = ["zip/deflate"]
+deflate-miniz = ["zip/deflate-miniz"]
+deflate-zlib = ["zip/deflate-zlib"]
+unreserved = ["zip/unreserved"]
+bzip2 = ["zip/bzip2"]
+time = ["zip/time"]
+zstd = ["zip/zstd"]
+default = ["aes-crypto", "bzip2", "deflate", "time", "zstd"]
 
 [dependencies]
 log = "0.4.14"
-zip = "0.6.4"
+zip = { version = "0.6.4", default_features = false }
 thiserror = "1.0"
 
 [dev-dependencies]
