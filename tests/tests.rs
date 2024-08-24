@@ -1,6 +1,5 @@
 use cute_log::log::LevelFilter;
 use cute_log::Logger;
-use dir_diff;
 use std::io::Cursor;
 use std::path::PathBuf;
 use std::sync::Once;
@@ -65,11 +64,7 @@ fn invalid_target() {
     initialize();
 
     let e = extract(Cursor::new(Vec::new()), &PathBuf::default(), false);
-    assert!(if let Err(ZipExtractError::Io(..)) = e {
-        true
-    } else {
-        false
-    })
+    assert!(matches!(e, Err(ZipExtractError::Io(..))))
 }
 
 #[test]
@@ -79,11 +74,7 @@ fn invalid_archive() {
     let mut source = vec![];
     source.extend_from_slice(include_bytes!("data/invalid.zip"));
     let e = extract(Cursor::new(source), &PathBuf::from("."), false);
-    assert!(if let Err(Zip(InvalidArchive(..))) = e {
-        true
-    } else {
-        false
-    });
+    assert!(matches!(e, Err(Zip(InvalidArchive(..)))));
 }
 
 fn get_tempdir() -> PathBuf {

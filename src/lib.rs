@@ -80,7 +80,7 @@ pub fn extract<S: Read + Seek>(
     strip_toplevel: bool,
 ) -> Result<(), ZipExtractError> {
     if !target_dir.exists() {
-        fs::create_dir(&target_dir)?;
+        fs::create_dir(target_dir)?;
     }
 
     let mut archive = zip::ZipArchive::new(source)?;
@@ -128,7 +128,7 @@ pub fn extract<S: Read + Seek>(
         } else {
             if let Some(p) = outpath.parent() {
                 if !p.exists() {
-                    fs::create_dir_all(&p)?;
+                    fs::create_dir_all(p)?;
                 }
             }
             let mut outfile = fs::File::create(&outpath)?;
@@ -175,7 +175,7 @@ fn has_toplevel<S: Read + Seek>(
 #[cfg(unix)]
 fn set_unix_mode(file: &zip::read::ZipFile, outpath: &Path) -> io::Result<()> {
     if let Some(m) = file.unix_mode() {
-        fs::set_permissions(&outpath, PermissionsExt::from_mode(m))?
+        fs::set_permissions(outpath, PermissionsExt::from_mode(m))?
     }
     Ok(())
 }
