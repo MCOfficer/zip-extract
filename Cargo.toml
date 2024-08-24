@@ -1,33 +1,36 @@
 [package]
 name = "zip-extract"
-version = "0.1.3"
+version = "0.2.0"
 authors = ["M*C*O <mcofficer@gmx.de>"]
-edition = "2018"
+edition = "2021"
 license = "MIT"
 description = "Archive extraction via zip-rs, automated."
 repository = "https://github.com/MCOfficer/zip-extract"
 keywords = ["zip", "archive", "extract"]
 categories = ["compression"]
 
-# Mirrors the features of zip package
-# https://github.com/zip-rs/zip/blob/master/Cargo.toml#L36
+# Mirrors the features of zip crate.
+# https://github.com/zip-rs/zip2/blob/6d3945645b7f3805068dd8c50d4fe56a66651069/Cargo.toml#L67
 [features]
 aes-crypto = ["zip/aes-crypto"]
+chrono = ["zip/chrono"]
 deflate = ["zip/deflate"]
+deflate-flate2 = ["zip/deflate-flate2"]
 deflate-miniz = ["zip/deflate-miniz"]
 deflate-zlib = ["zip/deflate-zlib"]
+deflate-zlib-ng = ["zip/deflate-zlib-ng"]
+deflate-zopfli = ["zip/deflate-zopfli"]
+lzma = ["zip/lzma"]
 unreserved = ["zip/unreserved"]
-bzip2 = ["zip/bzip2"]
-time = ["zip/time"]
-zstd = ["zip/zstd"]
-default = ["aes-crypto", "bzip2", "deflate", "zstd"]
+xz = ["zip/xz"]
+default = ["zip/default"]
 
 [dependencies]
-log = "0.4.20"
-zip = { version = "0.6.6", default_features = false }
+log = "0.4"
+zip = { version = "2", default-features = false }
 thiserror = "1.0"
 
 [dev-dependencies]
-cute-log = { version = "2.0.7", default_features = false }
+cute-log = { version = "2.0.7", default-features = false }
 dir-diff = "0.3.3"
 tempfile = "3.9.0"
