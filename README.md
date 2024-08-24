@@ -19,14 +19,4 @@ zip_extract::extract(Cursor::new(archive), &target_dir, true)?;
 
 ## Features
 
-All features are the same as the features of the [`zip`](https://github.com/zip-rs/zip/tree/v0.6.4#usage) crate:
-
-- `aes-crypto`: Support for AES encryption via the the `zip` crate
-- `deflate`: Support for the Deflate algorithm (`miniz_oxide` rust-backend)
-- `deflate-miniz`: ^ dito (`miniz` C-backend)
-- `deflate-zlib`: ^ dito (`zlib` C-backend)
-- `unreserved`: Support for the `unreserved` feature of the `zip` crate
-- `bzip2`: Support for .bzip2 archives via the `bzip2` crate
-- `time`: Support for the `time` crate for the `zip` crate
-- `zstd`: Support for the `zstd` crate for the `zip` crate
-- `default`: enables `"aes-crypto", "bzip2", "deflate", "zstd"`
+All features passed through to [`zip2`](https://docs.rs/crate/zip/2/features).

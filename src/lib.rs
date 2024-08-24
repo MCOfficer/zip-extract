@@ -15,14 +15,8 @@
 //! ```
 //!
 //! ## Features
-//! All features are passed through to `zip` and `flate2`. They are:
-//!
-//! - `deflate`: Support for the Deflate algorithm (`miniz_oxide` rust-backend)
-//! - `deflate-miniz`: ^ dito (`miniz` C-backend)
-//! - `deflate-zlib`: ^ dito (`zlib` C-backend)
-//! - `bzip2`: Support for .bzip2 archives via the `bzip2` crate
-//!
-//! The default is `bzip2` and `deflate`.
+//! All features are passed through to `zip2`, refer to
+//! [the documentation](https://docs.rs/crate/zip/2/features) for defaults and a list of features.
 
 #![forbid(unsafe_code)]
 
