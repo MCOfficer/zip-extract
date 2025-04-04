@@ -32,7 +32,6 @@ use std::{fs, io};
 use thiserror::Error;
 
 /// Re-export of zip's error type, for convenience.
-///
 pub use zip::result::ZipError;
 
 /// zip-extract's error type
@@ -167,7 +166,7 @@ fn has_toplevel<S: Read + Seek>(
 }
 
 #[cfg(unix)]
-fn set_unix_mode(file: &zip::read::ZipFile, outpath: &Path) -> io::Result<()> {
+fn set_unix_mode<R: Read>(file: &zip::read::ZipFile<R>, outpath: &Path) -> io::Result<()> {
     if let Some(m) = file.unix_mode() {
         fs::set_permissions(outpath, PermissionsExt::from_mode(m))?
     }
