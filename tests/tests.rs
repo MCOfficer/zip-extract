@@ -83,5 +83,5 @@ fn get_tempdir() -> PathBuf {
         .rand_bytes(12)
         .tempdir()
         .unwrap()
-        .into_path()
+        .keep()
 }
