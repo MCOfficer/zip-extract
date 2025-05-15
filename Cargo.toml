@@ -17,13 +17,14 @@ bzip2 = ["zip/bzip2"]
 chrono = ["zip/chrono"]
 deflate = ["zip/deflate"]
 deflate-flate2 = ["zip/deflate-flate2"]
-deflate-miniz = ["zip/deflate-miniz"]
-deflate-zlib = ["zip/deflate-zlib"]
-deflate-zlib-ng = ["zip/deflate-zlib-ng"]
+deflate-flate2-zlib = ["zip/deflate-flate2-zlib"]
+deflate-flate2-zlib-rs = ["zip/deflate-flate2-zlib-rs"]
 deflate-zopfli = ["zip/deflate-zopfli"]
 deflate64 = ["zip/deflate64"]
 lzma = ["zip/lzma"]
 time = ["zip/time"]
+nt-time = ["zip/nt-time"]
+jiff-02 = ["zip/jiff-02"]
 unreserved = ["zip/unreserved"]
 xz = ["zip/xz"]
 zstd = ["zip/zstd"]
@@ -31,7 +32,7 @@ default = ["zip/default"]
 
 [dependencies]
 log = "0.4"
-zip = { version = ">=2.6", default-features = false }
+zip = { version = "3", default-features = false }
 thiserror = "2.0"
 
 [dev-dependencies]
