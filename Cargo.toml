@@ -32,7 +32,7 @@ default = ["zip/default"]
 
 [dependencies]
 log = "0.4"
-zip = { version = "3", default-features = false }
+zip = { version = "4", default-features = false }
 thiserror = "2.0"
 
 [dev-dependencies]
