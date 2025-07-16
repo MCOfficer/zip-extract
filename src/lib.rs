@@ -1,3 +1,12 @@
+//!# Deprecated
+//!
+//! zip-extract was born out of frustration with the zip crate's tedious extraction methods.
+//! Things have changed: [`ZipArchive::extract`](https://docs.rs/zip/latest/zip/read/struct.ZipArchive.html#method.extract)
+//! and [`ZipArchive::extract_unwrapped_root_dir`](https://docs.rs/zip/latest/zip/read/struct.ZipArchive.html#method.extract_unwrapped_root_dir)
+//! provide the same functionality as zip-extract, without a wrapper crate. Please use them instead.
+//!
+//! ---
+//!
 //! # zip-extract
 //! zip-extract's primary goal is simple: Automate tedious zip extraction. Ever wanted to just unpack
 //! an archive somewhere? Well, here you go:
@@ -67,6 +76,7 @@ pub enum ZipExtractError {
 /// ```
 ///
 /// If on unix, `extract` will preserve permissions while extracting.
+#[deprecated = "zip-extract will no longer be maintained, since zip>=2.4.0 supports all its features via ZipArchive."]
 pub fn extract<S: Read + Seek>(
     source: S,
     target_dir: &Path,

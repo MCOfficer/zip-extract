@@ -1,3 +1,14 @@
+# Deprecated
+
+zip-extract was born out of frustration with the zip crate's tedious extraction methods.
+Things have changed:
+[`ZipArchive::extract`](https://docs.rs/zip/latest/zip/read/struct.ZipArchive.html#method.extract)
+and
+[`ZipArchive::extract_unwrapped_root_dir`](https://docs.rs/zip/latest/zip/read/struct.ZipArchive.html#method.extract_unwrapped_root_dir)
+provide the same functionality as zip-extract, without a wrapper crate. Please use them instead.
+
+---
+
 # zip-extract
 [![CI](https://github.com/MCOfficer/zip-extract/workflows/CI/badge.svg)](https://github.com/MCOfficer/zip-extract/actions)
 [![Crates.io](https://img.shields.io/crates/v/zip-extract)](https://crates.io/crates/zip-extract)
